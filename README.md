@@ -10,10 +10,14 @@ This module will display the Docker Version, Containers (running/all), Images, a
 Install
 ========
 
-First install py3status
-Second install `docker-py`. 
+First install py3status  
+
+Second install `docker-py`.   
+
 ```sudo pip install docker```
+
 Third, copy `docker_status.py` to `$HOME/.i3/py3status/docker_status.py`
+
 Finally restart i3wm. 
 
 
