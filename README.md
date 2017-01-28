@@ -16,9 +16,11 @@ First install py3status
 pip install py3status
 ```
 
-Second install `docker-py`.   
+Second install docker-py.   
 
-```pip install docker```
+```
+pip install docker
+```
 
 Third, copy `docker_status.py` to `$HOME/.i3/py3status/docker_status.py`
 
