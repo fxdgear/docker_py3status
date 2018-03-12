@@ -3,18 +3,24 @@
 This module will produce a ratio of running to all docker containers
 """
 import docker
-import subprocess
-import sys
-
 
 class Py3status:
 
     template = '🐳 {version} Containers: {running}/{total} Images: {images} Swarm: {managers}/{nodes}'
+    template_down = '🐳'
 
     def __init__(self):
         self.client = docker.from_env()
 
     def docker_status(self):
+        try:
+            self._get_info()
+        except:
+            return {
+                'full_text': self.template_down,
+                'cached_until': self.py3.time_in(1)
+            }
+
         containers = self._get_container()
         images = self._get_images()
         swarm = self._get_swarm()
@@ -60,4 +66,3 @@ class Py3status:
         if not bool(info["Swarm"]['Cluster']['ID']):
             return {}
         return {"managers": info["Swarm"]["Managers"], "nodes": info["Swarm"]["Nodes"]}
-
