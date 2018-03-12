@@ -31,8 +31,8 @@ class Py3status:
                 running=containers["running"],
                 total=containers["total"],
                 images=images["images"],
-                managers=swarm["managers"],
-                nodes=swarm["nodes"]
+                managers=swarm.get("managers"),
+                nodes=swarm.get("nodes")
             )
 
         return {
@@ -63,6 +63,9 @@ class Py3status:
 
     def _get_swarm(self):
         info = self._get_info()
-        if not bool(info["Swarm"]['Cluster']['ID']):
+        try:
+            if not bool(info["Swarm"]['Cluster']['ID']):
+                return {}
+        except KeyError:
             return {}
         return {"managers": info["Swarm"]["Managers"], "nodes": info["Swarm"]["Nodes"]}
